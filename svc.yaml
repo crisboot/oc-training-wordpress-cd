@@ -11,9 +11,6 @@ items:
     resourceVersion: "1355656"
     uid: d6130e2f-b113-4658-8690-b8e01e43affe
   spec:
-    clusterIP: 172.30.40.253
-    clusterIPs:
-    - 172.30.40.253
     internalTrafficPolicy: Cluster
     ipFamilies:
     - IPv4
@@ -39,9 +36,6 @@ items:
     resourceVersion: "1355663"
     uid: 519d9fef-19b3-41a3-9f52-f8f9b300b3c6
   spec:
-    clusterIP: 172.30.13.246
-    clusterIPs:
-    - 172.30.13.246
     internalTrafficPolicy: Cluster
     ipFamilies:
     - IPv4
@@ -67,9 +61,6 @@ items:
     resourceVersion: "1356623"
     uid: 656c965b-a543-4b76-b5f5-9b7497b5a250
   spec:
-    clusterIP: 172.30.118.149
-    clusterIPs:
-    - 172.30.118.149
     externalTrafficPolicy: Cluster
     internalTrafficPolicy: Cluster
     ipFamilies:
