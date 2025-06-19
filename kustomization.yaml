@@ -4,6 +4,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 resources:
 - deploy.yaml
 - wp-secret.yaml
+- wordpress-sa.yaml
 #- service.yaml
 #- mysql-app.yaml
 #- wordpress-app.yaml

@@ -1,0 +1,14 @@
+apiVersion: v1
+imagePullSecrets:
+- name: wordpress-sa-dockercfg-m7mvt
+kind: ServiceAccount
+metadata:
+  annotations:
+    openshift.io/internal-registry-pull-secret-ref: wordpress-sa-dockercfg-m7mvt
+  creationTimestamp: "2025-06-19T10:13:15Z"
+  name: wordpress-sa
+  namespace: cristian-wordpress-app
+  resourceVersion: "1354318"
+  uid: 5eef314b-8b68-42b5-9c11-e51743ac2f24
+secrets:
+- name: wordpress-sa-dockercfg-m7mvt
