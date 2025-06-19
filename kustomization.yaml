@@ -5,6 +5,7 @@ resources:
 - deploy.yaml
 - wp-secret.yaml
 - wordpress-sa.yaml
+- svc.yaml
 #- service.yaml
 #- mysql-app.yaml
 #- wordpress-app.yaml
