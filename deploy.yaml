@@ -1,0 +1,169 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"app":"mysql"},"name":"mysql","namespace":"cristian-wordpress-app"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"mysql"}},"strategy":{},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"mysql"}},"spec":{"containers":[{"env":[{"name":"MYSQL_USER","valueFrom":{"secretKeyRef":{"key":"user","name":"wp-secret"}}},{"name":"MYSQL_PASSWORD","valueFrom":{"secretKeyRef":{"key":"password","name":"wp-secret"}}},{"name":"MYSQL_DATABASE","valueFrom":{"secretKeyRef":{"key":"database","name":"wp-secret"}}}],"image":"registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-47","name":"mysql-57-rhel7","resources":{}}]}}},"status":{}}
+    creationTimestamp: "2025-06-19T10:11:56Z"
+    generation: 1
+    labels:
+      app: mysql
+    name: mysql
+    namespace: cristian-wordpress-app
+    resourceVersion: "1353150"
+    uid: ea3f361d-74d9-4665-8046-0865b51ad847
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: mysql
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: mysql
+      spec:
+        containers:
+        - env:
+          - name: MYSQL_USER
+            valueFrom:
+              secretKeyRef:
+                key: user
+                name: wp-secret
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: wp-secret
+          - name: MYSQL_DATABASE
+            valueFrom:
+              secretKeyRef:
+                key: database
+                name: wp-secret
+          image: registry.access.redhat.com/rhscl/mysql-57-rhel7:5.7-47
+          imagePullPolicy: IfNotPresent
+          name: mysql-57-rhel7
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2025-06-19T10:12:09Z"
+      lastUpdateTime: "2025-06-19T10:12:09Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-06-19T10:11:56Z"
+      lastUpdateTime: "2025-06-19T10:12:09Z"
+      message: ReplicaSet "mysql-578f49b8fc" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "3"
+    creationTimestamp: "2025-06-19T10:12:15Z"
+    generation: 3
+    labels:
+      app: wordpress
+    name: wordpress
+    namespace: cristian-wordpress-app
+    resourceVersion: "1354539"
+    uid: 369f60b0-a78f-4b7d-81eb-261c25661f33
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: wordpress
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: wordpress
+      spec:
+        containers:
+        - env:
+          - name: WORDPRESS_DB_HOST
+            value: mysql
+          - name: WORDPRESS_DB_NAME
+            value: wordpress
+          - name: WORDPRESS_DB_USER
+            valueFrom:
+              secretKeyRef:
+                key: user
+                name: wp-secret
+          - name: WORDPRESS_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                key: password
+                name: wp-secret
+          - name: WORDPRESS_DB_DATABASE
+            valueFrom:
+              secretKeyRef:
+                key: database
+                name: wp-secret
+          image: quay.io/ericbos1/wordpress:5.3.0
+          imagePullPolicy: IfNotPresent
+          name: wordpress
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        serviceAccount: wordpress-sa
+        serviceAccountName: wordpress-sa
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2025-06-19T10:13:12Z"
+      lastUpdateTime: "2025-06-19T10:13:12Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-06-19T10:12:15Z"
+      lastUpdateTime: "2025-06-19T10:13:27Z"
+      message: ReplicaSet "wordpress-6b65c987c4" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 3
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+kind: List
+metadata:
+  resourceVersion: ""
